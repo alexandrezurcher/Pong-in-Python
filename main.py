@@ -5,17 +5,29 @@ screen = Screen()
 screen.setup(width=800,height=600)
 screen.bgcolor("black")
 screen.title("Ping Pong")
+screen.tracer(0)
 
-paddle_1 = Turtle("square")
-paddle_1.color("white")
-paddle_1.penup()
-paddle_1.setpos(350, 0)
-paddle_1.shapesize(stretch_wid=5, stretch_len=1, outline=1)
+paddle = Turtle("square")
+paddle.color("white")
+paddle.shapesize(stretch_wid=5, stretch_len=1)
+paddle.penup()
+paddle.setpos(350, 0)
+
+def go_up():
+    new_y = paddle.ycor() + 20
+    paddle.goto(paddle.xcor(), new_y)
+
+def go_down():
+    new_y = paddle.ycor() - 20
+    paddle.goto(paddle.xcor(), new_y)
 
 screen.listen()
 
+screen.onkey(fun=go_up, key="Up")
+screen.onkey(fun=go_down, key="Down")
 
-
-
+game_is_on = True
+while game_is_on:
+    screen.update()
 
 screen.exitonclick()
